@@ -1,0 +1,140 @@
+from keys import Key
+import numpy as np
+
+
+class TableGame:
+
+    def __init__(self, shape=(50, 50)):
+        """
+        Initialize Table of the game
+        :param shape: actual shape of the board
+        """
+        # Initialize board
+        self.table = np.zeros(shape)
+        self.table[0, :] = np.ones(shape[0])
+        self.table[shape[0] - 1, :] = np.ones(shape[0])
+        # Add borders
+        for i in range(1, self.table.shape[0]):
+            self.table[i, 0] = 1
+            self.table[i, shape[1] - 1] = 1
+        # Initialize bikes
+        self.bikes = np.array([[25,10], [25,40]])
+        self.alive = np.array([[True], [True]])
+        self.bikes_orientation = [Key.RIGHT, Key.LEFT]
+        self.speeds = [1,2,3]
+        for p in self.bikes:
+            self.apply(p, 1)
+
+    def apply(self, pos, num):
+        """
+        Apply pixel update in the table
+        :param pos: (x,y) coordinates
+        :param num: new value
+        :return:
+        """
+        self.table[pos[0]][pos[1]] = num
+
+    def remove_bike(self, bike):
+        """
+        Remove bike and wall from the table
+        :param bike: bike number
+        :return:
+        """
+        self.table[self.bikes[bike][0]][self.bikes[bike][1]] = 0
+        shape = self.table.shape
+        table = self.table.reshape(-1)
+        index = np.array(list(map(lambda x: (x == bike + 3), table)))
+        index = np.nonzero(index)[0]
+        table[index] = np.zeros(len(index))
+        self.table = self.table.reshape(shape)
+
+    def apply_round(self, moves):
+        """
+        Apply round moves for time t
+        :param moves: moves for time t
+        :return:
+        """
+        for i in range(moves.shape[0] - 1):
+            for j, p in enumerate(self.bikes):
+                self.apply(p, j + 3)
+            self.bikes = np.array(self.bikes + moves[i] * self.alive).astype(int)
+            for j, p in enumerate(self.bikes):
+                if self.table[p[0]][p[1]] > 0 and not np.all(moves[i][j] == [0, 0]):
+                    self.alive[j] = False
+                    self.remove_bike(j)
+                else:
+                    self.apply(p, 1)
+
+    def is_over(self):
+        """
+        Return True if there is only one bike standing
+        :return: Bool
+        """
+        return True if np.sum(self.alive.reshape(-1)) == 1 else False
+
+    def new_move(self):
+        """
+        Initialize new move for t+1
+        (by default all bikes are moving forward at speed 1)
+        :return: new initialize move
+        """
+        aux = np.zeros((3, self.bikes.shape[0], 2))
+        for i in range(self.bikes.shape[0]):
+            aux = self.add_move(i, aux, Key.FORWARD, 1)
+        return aux
+
+    def add_move(self, bike, moves, move, speed):
+        """
+        Add bike move to the game
+        :param bike: number bike
+        :param moves: list of moves
+        :param move: move to do
+        :param speed: Speed of the bike
+        :return: return moves update it
+        """
+        if move == Key.TURN_RIGHT:
+            self.orientation_right(bike)
+        elif move == Key.TURN_LEFT:
+            self.orientation_left(bike)
+        if self.bikes_orientation[bike] == Key.RIGHT:
+            do_ = [0, 1]
+        elif self.bikes_orientation[bike] == Key.UP:
+            do_ = [1, 0]
+        elif self.bikes_orientation[bike] == Key.LEFT:
+            do_ = [0, -1]
+        else:
+            do_ = [-1, 0]
+        moves[0][bike] = do_
+        for i in range(speed):
+            moves[i][bike] = do_
+        return moves
+
+    def orientation_left(self, bike):
+        """
+        Update orientation bike when turn left
+        :param bike: number bike
+        :return:
+        """
+        if self.bikes_orientation[bike] == Key.RIGHT:
+            self.bikes_orientation[bike] = Key.UP
+        elif self.bikes_orientation[bike] == Key.UP:
+            self.bikes_orientation[bike] = Key.LEFT
+        elif self.bikes_orientation[bike] == Key.LEFT:
+            self.bikes_orientation[bike] = Key.DOWN
+        else:
+            self.bikes_orientation[bike] = Key.RIGHT
+
+    def orientation_right(self, bike):
+        """
+        Update origntation bike when turn right
+        :param bike: number bike
+        :return:
+        """
+        if self.bikes_orientation[bike] == Key.RIGHT:
+            self.bikes_orientation[bike] = Key.DOWN
+        elif self.bikes_orientation[bike] == Key.UP:
+            self.bikes_orientation[bike] = Key.RIGHT
+        elif self.bikes_orientation[bike] == Key.LEFT:
+            self.bikes_orientation[bike] = Key.UP
+        else:
+            self.bikes_orientation[bike] = Key.LEFT
