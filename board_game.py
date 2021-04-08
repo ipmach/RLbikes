@@ -63,7 +63,8 @@ class TableGame:
         :param moves: moves for time t
         :return:
         """
-        for i in range(moves.shape[0] - 1):
+        self.old_board = np.copy(self.board)
+        for i in range(moves.shape[0]):
             for j, p in enumerate(self.bikes):
                 self.apply(j, p, j + 3)
             self.bikes = np.array(self.bikes + moves[i] * self.alive).astype(int)
