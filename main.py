@@ -39,6 +39,13 @@ moves = tg.new_move()
 moves = tg.add_move(0, moves, Key.TURN_LEFT, 3)
 tg.apply_round(moves)
 
+moves = tg.new_move()
+#moves = tg.add_move(1, moves, Key.TURN_LEFT, 2)
+moves = tg.add_move(0, moves, Key.TURN_LEFT, 3)
+tg.apply_round(moves)
+
+
+
 
 print(tg.alive)
 print(tg.is_over())

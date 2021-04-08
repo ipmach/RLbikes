@@ -4,7 +4,7 @@ import numpy as np
 
 class TableGame:
 
-    def __init__(self, shape=(50, 50), bikes=[[25,10], [25,40]], load_map=None):
+    def __init__(self, shape=(50, 50), bikes=[[25, 10], [25, 40]], load_map=None):
         """
         Initialize Table of the game
         :param shape: actual shape of the board
@@ -28,17 +28,19 @@ class TableGame:
         self.alive = np.array([[True] for _ in range(len(self.bikes))])
         self.bikes_orientation = [Key.RIGHT, Key.LEFT]
         self.speeds = [1,2,3]
-        for p in self.bikes:
-            self.apply(p, 1)
+        for j, p in enumerate(self.bikes):
+            self.apply(j, p, 1)
 
-    def apply(self, pos, num):
+    def apply(self, bike, pos, num):
         """
         Apply pixel update in the board
+        :param bike: bike number
         :param pos: (x,y) coordinates
         :param num: new value
         :return:
         """
-        self.board[pos[0]][pos[1]] = num
+        if self.alive[bike]:  # Only update if bike still alvie
+            self.board[pos[0]][pos[1]] = num
 
     def remove_bike(self, bike):
         """
@@ -53,6 +55,7 @@ class TableGame:
         index = np.nonzero(index)[0]
         board[index] = np.zeros(len(index))
         self.board = self.board.reshape(shape)
+        print('I remove bike', bike, self.board[self.bikes[bike][0]][self.bikes[bike][1]])
 
     def apply_round(self, moves):
         """
@@ -62,14 +65,15 @@ class TableGame:
         """
         for i in range(moves.shape[0] - 1):
             for j, p in enumerate(self.bikes):
-                self.apply(p, j + 3)
+                self.apply(j, p, j + 3)
             self.bikes = np.array(self.bikes + moves[i] * self.alive).astype(int)
             for j, p in enumerate(self.bikes):
                 if self.board[p[0]][p[1]] > 0 and not np.all(moves[i][j] == [0, 0]):
-                    self.alive[j] = False
-                    self.remove_bike(j)
+                    if self.alive[j]:  # Only remove onces
+                        self.alive[j] = False
+                        self.remove_bike(j)
                 else:
-                    self.apply(p, 1)
+                    self.apply(j, p, 1)
 
     def is_over(self):
         """
