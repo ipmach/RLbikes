@@ -4,7 +4,7 @@ from keys import Key
 
 
 
-tg = Game()
+tg = Game(load_map='maps/map_1.npy')
 moves = tg.new_move()
 moves = tg.add_move(1, moves, Key.TURN_LEFT, 2)
 tg.apply_round(moves)
@@ -44,7 +44,7 @@ print(tg.alive)
 print(tg.is_over())
 
 plt.subplot(121)
-plt.imshow(tg.table)
+plt.imshow(tg.board)
 plt.subplot(122)
 plt.imshow(tg.get_view_bike(0, 4, rotate=True, mono=True))
 plt.colorbar()

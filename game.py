@@ -1,4 +1,4 @@
-from table_game import TableGame
+from board_game import TableGame
 from keys import Key
 import numpy as np
 
@@ -17,11 +17,11 @@ class Game(TableGame):
         coord = self.bikes[bike]
 
         low_x = coord[0] - range if coord[0] - range >= 0 else 0
-        high_x = coord[0] + range + 1 if coord[0] + range + 1 < self.table.shape[0] else self.table.shape[0] - 1
+        high_x = coord[0] + range + 1 if coord[0] + range + 1 < self.board.shape[0] else self.board.shape[0] - 1
         low_y = coord[1] - range if coord[1] - range >= 0 else 0
-        high_y = coord[1] + range + 1 if coord[1] + range + 1 < self.table.shape[1] else self.table.shape[1] - 1
+        high_y = coord[1] + range + 1 if coord[1] + range + 1 < self.board.shape[1] else self.board.shape[1] - 1
 
-        view = self.table[low_x: high_x, low_y: high_y]
+        view = self.board[low_x: high_x, low_y: high_y]
 
         if mono:
             reduce = np.vectorize(lambda x: x if x < 1 else 1)
