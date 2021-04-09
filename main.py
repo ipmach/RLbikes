@@ -1,80 +1,21 @@
 import matplotlib.pyplot as plt
+from run_game import RunGame
 from game import Game
 from keys import Key
+import threading
 
+game = Game(load_map='maps/map_1.npy')
+a = RunGame(game, view=False)
 
+x = threading.Thread(target=a, args=())
+x.start()
+t = -1
+while not a.game.is_over():
+    a.view_plt()
 
-tg = Game(load_map='maps/map_1.npy')
-moves = tg.new_move()
-moves = tg.add_move(1, moves, Key.TURN_LEFT, 2)
-tg.apply_round(moves)
-
-print(tg.is_over())
-
-moves = tg.new_move()
-moves = tg.add_move(1, moves, Key.FORWARD, 2)
-tg.apply_round(moves)
-
-moves = tg.new_move()
-moves = tg.add_move(1, moves, Key.TURN_LEFT, 2)
-tg.apply_round(moves)
-
-moves = tg.new_move()
-moves = tg.add_move(1, moves, Key.TURN_RIGHT, 2)
-moves = tg.add_move(0, moves, Key.TURN_RIGHT, 3)
-tg.apply_round(moves)
-
-moves = tg.new_move()
-moves = tg.add_move(1, moves, Key.TURN_RIGHT, 2)
-moves = tg.add_move(0, moves, Key.TURN_LEFT, 3)
-tg.apply_round(moves)
-
-moves = tg.new_move()
-moves = tg.add_move(1, moves, Key.TURN_RIGHT, 2)
-moves = tg.add_move(0, moves, Key.FORWARD, 3)
-tg.apply_round(moves)
-
-moves = tg.new_move()
-#moves = tg.add_move(1, moves, Key.TURN_LEFT, 2)
-moves = tg.add_move(0, moves, Key.TURN_LEFT, 3)
-tg.apply_round(moves)
-
-moves = tg.new_move()
-#moves = tg.add_move(1, moves, Key.TURN_LEFT, 2)
-moves = tg.add_move(0, moves, Key.TURN_LEFT, 3)
-tg.apply_round(moves)
-
-moves = tg.new_move()
-#moves = tg.add_move(1, moves, Key.TURN_LEFT, 2)
-moves = tg.add_move(0, moves, Key.TURN_RIGHT, 3)
-tg.apply_round(moves)
-
-moves = tg.new_move()
-#moves = tg.add_move(1, moves, Key.TURN_LEFT, 2)
-moves = tg.add_move(0, moves, Key.FORWARD, 2)
-tg.apply_round(moves)
-
-tg.get_view_board()
-
-moves = tg.new_move()
-#moves = tg.add_move(1, moves, Key.TURN_LEFT, 2)
-moves = tg.add_move(0, moves, Key.FORWARD, 1)
-tg.apply_round(moves)
-
-moves = tg.new_move()
-moves = tg.add_move(0, moves, Key.FORWARD, 3)
-tg.apply_round(moves)
-
-print(tg.alive)
-print(tg.is_over())
-print(tg.get_view_board(only_update=True, compress=True))
-
-plt.figure(1)
-plt.subplot(121)
-plt.imshow(tg.get_view_board(only_update=False))
-plt.subplot(122)
-plt.imshow(tg.get_view_bike(0, 20, rotate=True, mono=True))
-plt.colorbar()
-plt.figure(2)
-plt.imshow(tg.get_view_board(only_update=True))
+    moves = a.get_moves()
+    game.add_move(1, moves, Key.TURN_RIGHT, 3)
+plt.imshow(a.game.get_view_board())
 plt.show()
+
+

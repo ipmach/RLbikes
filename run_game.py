@@ -16,6 +16,28 @@ class RunGame:
         self.game = game_
         self.time_ = time_
         self.view = view
+        self.moves = None
+        self.t = 0
+
+    def get_moves(self):
+        """
+        Return the moves pointers
+        :return: moves
+        """
+        return self.moves
+
+    def get_t(self):
+        """
+        Return time step
+        :return: time step
+        """
+        return self.t
+
+    def view_plt(self):
+        plt.imshow(self.game.get_view_board())
+        plt.title('time t = {}'.format(self.t))
+        plt.pause(self.time_)
+        plt.clf()
         
     def __call__(self):
         """
@@ -23,19 +45,17 @@ class RunGame:
         :return:
         """
         while not self.game.is_over():  # Game loop
-            moves = self.game.new_move()  # Initialize new move
+            self.moves = self.game.new_move()  # Initialize new move
             if self.view:  # with visualization
-                plt.imshow(self.game.get_view_board())
-                plt.pause(self.time_)
-                plt.clf()
+                self.view_plt()
             else:  # Without visualization
                 time.sleep(self.time_)
-            self.game.apply_round(moves)  # Apply move
+            self.game.apply_round(self.moves)  # Apply move
+            self.t += 1
 
-        print('Bike {} won!!!'.format(np.argmax(self.game.alive.reshape(-1))))
+        print('Bike {} won in t={}!!!'.format(np.argmax(self.game.alive.reshape(-1)),
+                                              self.t))
 
 
-game = Game(load_map='maps/map_1.npy')
-a = RunGame(game)
-a()
+
 
