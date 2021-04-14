@@ -23,6 +23,20 @@ Run game controls:
   def __call__(): pass  # start game
 ````
 
+Game manager controls:
+
+``` python
+  def __getitem__(item): pass  # Get game instance
+  def start_game(game_index): pass  # Start game
+  # Apply move in game
+  def apply_move(game_index, bike, move, speed): pass  
+  def get_timestep(game_index): pass  # Get timestep game
+  def view_plt(game_index): pass  # Plot in matplotlib game
+  def is_over(game_index): pass  # Get board of the game
+  # Get bike view of the game
+  def get_bike(game_index, bike, range_, mono=False, rotate=False): pass
+````
+
 ## View example
 
 In the left view of the board and in the right possible view of one bike. (Game interface not yet implemented.)
