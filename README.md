@@ -1,5 +1,9 @@
 # RLbikes
 
+Working progress.
+
+## API
+
 Game controls:
 
 ``` python
@@ -18,3 +22,9 @@ Run game controls:
   def view_plt(): pass  # view game with plt
   def __call__(): pass  # start game
 ````
+
+## View example
+
+In the left view of the board and in the right possible view of one bike. (Game interface not yet implemented.)
+
+![Graph](https://github.com/ipmach/RLbikes/blob/main/Documentation/plt_img.png)
