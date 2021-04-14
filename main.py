@@ -1,21 +1,21 @@
+from game_manager import GameManager
 import matplotlib.pyplot as plt
-from run_game import RunGame
-from game import Game
 from keys import Key
-import threading
 
-game = Game(load_map='maps/map_1.npy')
-a = RunGame(game, view=False)
 
-x = threading.Thread(target=a, args=())
-x.start()
+a = GameManager("executions/example_execution.json")
+(run, _) = a[0]
+a.start_game(0)
+a.start_game(1)
+
 t = -1
-while not a.game.is_over():
-    a.view_plt()
-
-    moves = a.get_moves()
-    game.add_move(1, moves, Key.TURN_RIGHT, 3)
-plt.imshow(a.game.get_view_board())
+while not a.is_over(0):
+    a.view_plt(0)
+    t_aux = a.get_timestep(0)
+    if t < t_aux:
+        a.apply_move(0, 1, Key.TURN_RIGHT, 3)
+        t = t_aux
+plt.imshow(a.get_board(0))
 plt.show()
 
 
