@@ -3,7 +3,7 @@
     {
       "map": "maps/map_1.npy",
       "bikes": [[25, 10], [25, 40]],
-      "time": "0.2"
+      "time": "0.1"
     },
     {
       "map": "maps/map_1.npy",
