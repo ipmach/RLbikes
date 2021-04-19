@@ -81,7 +81,7 @@ class TableGame:
         Return True if there is only one bike standing
         :return: Bool
         """
-        return True if np.sum(self.alive.reshape(-1)) == 1 else False
+        return True if np.sum(self.alive.reshape(-1)) <= 1 else False
 
     def new_move(self):
         """

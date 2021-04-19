@@ -15,7 +15,10 @@ class GameManager:
         self.list_games = []
         execution = json.load(open(execution_path))
         for game in execution['Games']:
-            aux = Game(load_map=game['map'],
+            map = game['map']
+            if map == "":
+                map = None
+            aux = Game(load_map=map,
                        bikes=game['bikes'])
             self.list_games.append(RunGame(aux, view=False,
                                            time_=float(game['time'])))
