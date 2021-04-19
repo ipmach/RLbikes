@@ -51,10 +51,10 @@ while not a.is_over(0) or not a.is_over(1):
     plt.pause(0.1)
     plt.clf()
 
-plt.title("Game 1 t: " + str(t_aux))
+plt.title("Game 0 t: " + str(t_aux))
 plt.imshow(a.get_board(0))
 plt.subplot(1, 2, 2)
-plt.title("Game 2 t: " + str(t_aux2))
+plt.title("Game 1 t: " + str(t_aux2))
 plt.imshow(a.get_board(1))
 plt.show()
 

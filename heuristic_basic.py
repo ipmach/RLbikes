@@ -5,6 +5,7 @@ import numpy as np
 class BasicHeuristic:
 
     def __init__(self, speed=1, deterministic=True):
+
         self.speed = speed
         self.t_aux = -1
         self.deterministic = deterministic
