@@ -55,6 +55,7 @@ class RunGame:
 
         print('Bike {} won in t={}!!!'.format(np.argmax(self.game.alive.reshape(-1)),
                                               self.t))
+        self.game.status["Status"] = "Finish"
 
 
 

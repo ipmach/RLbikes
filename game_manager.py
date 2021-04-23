@@ -13,6 +13,7 @@ class GameManager:
         """
         self.list_threads = []
         self.list_games = []
+        self.games_status = []
         execution = json.load(open(execution_path))
         for game in execution['Games']:
             map = game['map']
@@ -20,6 +21,7 @@ class GameManager:
                 map = None
             aux = Game(load_map=map,
                        bikes=game['bikes'])
+            self.games_status.append(aux.get_status())
             self.list_games.append(RunGame(aux, view=False,
                                            time_=float(game['time'])))
             self.list_threads.append(threading.Thread(
@@ -34,12 +36,26 @@ class GameManager:
         """
         return self.list_games[item], self.list_threads[item]
 
+    def __len__(self):
+        return len(self.list_games)
+
+    def join_game(self, game):
+        if self.games_status[game]["Joined game"] == self.games_status[game]["Number bikes"]:
+            return False
+        elif self.games_status[game]["Joined game"] < self.games_status[game]["Number bikes"]:
+            self.games_status[game]["Joined game"] += 1
+            if self.games_status[game]["Joined game"] == self.games_status[game]["Number bikes"]:
+                self.start_game(game)
+            return True
+
+
     def start_game(self, game_index):
         """
         Start game
         :param game_index: index game
         :return:
         """
+        self.games_status[game_index]['Status'] = "Running"
         (_, thread) = self[game_index]
         thread.start()
 

@@ -12,6 +12,7 @@ class TableGame:
         # Initialize board
         if load_map is None:
             self.board = np.zeros(shape)
+            load_map = 'Basic'
         else:  # Load define map
             self.board = np.load(load_map)
         # Always add borders and check walls are 1 and rest 0
@@ -30,6 +31,11 @@ class TableGame:
         self.speeds = [1,2,3]
         for j, p in enumerate(self.bikes):
             self.apply(j, p, 1)
+        self.status = {"Map": load_map, "Number bikes": len(self.bikes),
+                       "Joined game": 0, "Status": 'Waiting players'}
+
+    def get_status(self):
+        return self.status
 
     def apply(self, bike, pos, num):
         """
