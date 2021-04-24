@@ -48,13 +48,14 @@ class Game(TableGame):
         return view, (low_x_correction, low_y_correction,
                       high_x_correction, high_y_correction)
 
-    def get_view_bike(self, bike, range_, mono=False, rotate=False):
+    def get_view_bike(self, bike, range_, mono=False, rotate=False, compress=False):
         """
         Get view of the bike
         :param bike: number bike
         :param range_: range of view
         :param mono: binary image or not
         :param rotate: rotate the view so the bike is always looking same position
+        :param compress: compress the view
         :return: the view of the bike
         """
         coord = self.bikes[bike]
@@ -78,6 +79,10 @@ class Game(TableGame):
                 view = np.rot90(view, k=3)
             elif self.bikes_orientation[bike] == Key.UP:
                 view = np.rot90(view, k=2)
+
+        if compress:  # Compress the board in a sparse matrix
+            view = csr_matrix(view)
+
         return view
 
     def get_view_board(self, only_update=False, compress=False):

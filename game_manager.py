@@ -99,6 +99,16 @@ class GameManager:
         (run, _) = self[game_index]
         return run.game.is_over()
 
+    def is_alive(self, game_index, bike):
+        """
+        Check if the bike is alive
+        :param game_index: index game
+        :param bike: index bike
+        :return: boolean
+        """
+        (run, _) = self[game_index]
+        return run.game.alive[bike][0]
+
     def get_board(self, game_index, only_update=False, compress=False):
         """
         Get board of the game
@@ -111,15 +121,16 @@ class GameManager:
         return run.game.get_view_board(only_update=only_update,
                                        compress=compress)
 
-    def get_bike(self, game_index, bike, range_, mono=False, rotate=False):
+    def get_bike(self, game_index, bike, range_, mono=False, rotate=False, compress=True):
         """
         Get bike view of the game
         :param game_index: index game
         :param bike: number bike
         :param range_: range view bike
-        :param mono: binary values or not
+        :param mono: binary values ornot
         :param rotate: rotate view so bike always point same direction
+        :param compress: return compress form
         :return: view bike
         """
         (run, _) = self[game_index]
-        return run.game.get_view_bike(bike, range_, mono=mono, rotate=rotate)
+        return run.game.get_view_bike(bike, range_, mono=mono, rotate=rotate, compress=compress)
