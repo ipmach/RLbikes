@@ -1,4 +1,4 @@
-from keys import Key
+from gameBike.keys import Key
 import numpy as np
 
 
@@ -6,7 +6,7 @@ class TableGame:
 
     def __init__(self, shape=(50, 50), bikes=[[25, 10], [25, 40]], load_map=None):
         """
-        Initialize Table of the game
+        Initialize Table of the gameBike
         :param shape: actual shape of the board
         """
         # Initialize board
@@ -32,7 +32,7 @@ class TableGame:
         for j, p in enumerate(self.bikes):
             self.apply(j, p, 1)
         self.status = {"Map": load_map, "Number bikes": len(self.bikes),
-                       "Joined game": 0, "Status": 'Waiting players'}
+                       "Joined gameBike": 0, "Status": 'Waiting players'}
 
     def get_status(self):
         return self.status
@@ -102,7 +102,7 @@ class TableGame:
 
     def add_move(self, bike, moves, move, speed):
         """
-        Add bike move to the game
+        Add bike move to the gameBike
         :param bike: number bike
         :param moves: list of moves
         :param move: move to do

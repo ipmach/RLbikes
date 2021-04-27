@@ -1,6 +1,6 @@
+from gameBike.board_game import TableGame
 from scipy.sparse import csr_matrix
-from board_game import TableGame
-from keys import Key
+from gameBike.keys import Key
 import numpy as np
 
 
@@ -87,7 +87,7 @@ class Game(TableGame):
 
     def get_view_board(self, only_update=False, compress=False):
         """
-        Get view of the board game
+        Get view of the board gameBike
         :param only_update: only show update pixels
         :param compress: compress the view
         :return: the board view

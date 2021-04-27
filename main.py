@@ -1,5 +1,5 @@
 from heuristic_basic import BasicHeuristic
-from game_manager import GameManager
+from gameBike.game_manager import GameManager
 import matplotlib.pyplot as plt
 
 def visualize_board(t1, t2, a):

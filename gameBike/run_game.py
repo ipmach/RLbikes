@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-from game import Game
 import numpy as np
 import time
 
@@ -8,10 +7,10 @@ class RunGame:
 
     def __init__(self, game_, time_=0.1, view=True):
         """
-        Run game in real time
-        :param game_: game we want to run
-        :param time_: time between each game update
-        :param view: True if we want to see the game in pyplot
+        Run gameBike in real time
+        :param game_: gameBike we want to run
+        :param time_: time between each gameBike update
+        :param view: True if we want to see the gameBike in pyplot
         """
         self.game = game_
         self.time_ = time_
@@ -41,7 +40,7 @@ class RunGame:
         
     def __call__(self):
         """
-        Start the game, will run until the game raise the over flag
+        Start the gameBike, will run until the gameBike raise the over flag
         :return:
         """
         while not self.game.is_over():  # Game loop

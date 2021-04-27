@@ -1,0 +1,11 @@
+canvas {
+    border: 1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+
+h1{
+  font-family: "Oswald", serif;
+  font-weight: 300;
+  color: #222222;
+  font-size: 70px;
+}

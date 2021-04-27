@@ -1,4 +1,4 @@
-from keys import Key
+from gameBike.keys import Key
 import numpy as np
 
 

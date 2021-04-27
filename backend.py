@@ -1,4 +1,5 @@
-from game_manager import GameManager
+from gameBike.game_manager import GameManager
+from flask import render_template
 from flask import request
 from flask import Flask
 import json
@@ -24,8 +25,8 @@ def status():
 @app.route('/status/<game>')
 def status_games(game=None):
     """
-    Return status of the games or a specific game
-    :param game: index game for a specific game
+    Return status of the games or a specific gameBike
+    :param game: index gameBike for a specific gameBike
     :return: status
     """
     if game is None:
@@ -41,13 +42,13 @@ def status_games(game=None):
 @app.route('/join/<game>')
 def join_game(game):
     """
-    Request join a game
-    :param game: index game
+    Request join a gameBike
+    :param game: index gameBike
     :return: confirmation
     """
     game = int(game)
     if 0 > game or game > len(games):
-        return "Not a valid game"
+        return "Not a valid gameBike"
     if games.join_game(game):
         return "Registration done"
     else:
@@ -57,9 +58,9 @@ def join_game(game):
 @app.route('/view/board/full/<game>')
 def view_game(game):
     """
-    Get view of a game
-    :param game: index game
-    :return: view game
+    Get view of a gameBike
+    :param game: index gameBike
+    :return: view gameBike
     """
     game = int(game)
     return {"Board_view": str(games.get_board(game,
@@ -70,9 +71,9 @@ def view_game(game):
 @app.route('/view/board/update/<game>')
 def view_game_update(game):
     """
-    Get view of a game only update pixels
-    :param game: index game
-    :return: view game
+    Get view of a gameBike only update pixels
+    :param game: index gameBike
+    :return: view gameBike
     """
     game = int(game)
     if games.games_status[game]['Status'] == 'Running':
@@ -87,7 +88,7 @@ def view_game_update(game):
 def return_view(game, data):
     """
     Return view of the bike (POST)
-    :param game: game indedx
+    :param game: gameBike indedx
     :param data: dictionary with data need it
     :return: view bike
     """
@@ -106,7 +107,7 @@ def return_view(game, data):
 def view_bike(game):
     """
     Get view of the bike (POST)
-    :param game: game index
+    :param game: gameBike index
     :return: view bike
     """
     game = int(game)
@@ -119,8 +120,8 @@ def view_bike(game):
 @app.route('/play/<game>', methods=['GET', 'POST'])
 def play_bike(game):
     """
-    Make move in game (POST), also con return view bike
-    :param game: game index
+    Make move in gameBike (POST), also con return view bike
+    :param game: gameBike index
     :return: view bike or confirmation
     """
     game = int(game)
@@ -135,3 +136,8 @@ def play_bike(game):
         else:
             return "OK"
     return "Must be a POST request"
+
+
+@app.route('/visualizer/<game>')
+def game(game):
+    return render_template('visualizer.html')
