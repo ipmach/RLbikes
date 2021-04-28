@@ -96,9 +96,14 @@ class Game(TableGame):
         reduce = np.vectorize(lambda x: x if x < 1 else 1)
 
         if only_update:  # Only show the last update pixels
-            index = np.nonzero(reduce(board) - reduce(self.old_board))
-            board = np.zeros(board.shape)
-            board[index] = self.board[index]
+            try:
+                index = np.nonzero(board - self.old_board)
+                board = np.zeros(board.shape)
+                board[index] = self.board[index]
+                print(index, self.board[index])
+            except AttributeError:
+                board = np.zeros(board.shape)
+            print(np.max(self.board))
 
         if compress:  # Compress the board in a sparse matrix
             board = csr_matrix(board)

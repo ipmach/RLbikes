@@ -2,6 +2,7 @@ from gameBike.game_manager import GameManager
 from flask import render_template
 from flask import request
 from flask import Flask
+import numpy as np
 import json
 
 app = Flask(__name__)
@@ -55,6 +56,15 @@ def join_game(game):
         return "Not valid registration"
 
 
+def format_view(view):
+    matrix = ""
+    index = np.nonzero(view)
+    data = view[index]
+    index = np.array(index).T
+    for z, [i, j] in enumerate(index):
+        matrix += str(i) + "," + str(j) + "," + str(data[z]) + " "
+    return matrix
+
 @app.route('/view/board/full/<game>')
 def view_game(game):
     """
@@ -63,8 +73,7 @@ def view_game(game):
     :return: view gameBike
     """
     game = int(game)
-    return {"Board_view": str(games.get_board(game,
-                                              compress=True)).replace("\n","").replace("\t"," "),
+    return {"Board_view": format_view(games.get_board(game)),
             "TimeStep": games.get_timestep(game)}
 
 
@@ -77,12 +86,12 @@ def view_game_update(game):
     """
     game = int(game)
     if games.games_status[game]['Status'] == 'Running':
-        return {"Board_view": str(games.get_board(game, only_update=True,
-                                                  compress=True)).replace("\n","").replace("\t"," "),
+        return {"Board_view": format_view(games.get_board(game, only_update=True)),
                 "TimeStep": games.get_timestep(game),
                 "Status": games.games_status[game]['Status']}
     else:
-        return "Game is not running"
+        return {"Board_view": {},
+                "Status": games.games_status[game]['Status']}
 
 
 def return_view(game, data):

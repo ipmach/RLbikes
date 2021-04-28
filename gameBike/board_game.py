@@ -28,7 +28,7 @@ class TableGame:
         self.bikes = np.array(bikes)
         self.alive = np.array([[True] for _ in range(len(self.bikes))])
         self.bikes_orientation = [Key.RIGHT, Key.LEFT]
-        self.speeds = [1,2,3]
+        self.speeds = [1, 2, 3]
         for j, p in enumerate(self.bikes):
             self.apply(j, p, 1)
         self.status = {"Map": load_map, "Number bikes": len(self.bikes),
