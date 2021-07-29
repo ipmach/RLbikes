@@ -1,11 +1,41 @@
 canvas {
-    border: 1px solid #d3d3d3;
-    background-color: #f1f1f1;
+    border: 1px solid #e68a00;
+    background-color: #e6f2ff;
 }
 
 h1{
   font-family: "Oswald", serif;
-  font-weight: 300;
-  color: #222222;
+  color: #e6e6e6;
   font-size: 70px;
+  text-decoration: underline;
+}
+
+.title{
+    position: relative;
+    left: 13%;
+}
+
+.canvas_css{
+    position: relative;
+    left: 13%;
+    float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.infoborder {
+  border-style: solid;
+  border-color: #e6e6e6;
+  position: relative;
+  left: 13%;
+  float:left;
+  padding: 9px;
+}
+
+.separation {
+  overflow: hidden;
+}
+
+body {
+  background-color: #3399ff;
 }

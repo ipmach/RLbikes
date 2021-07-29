@@ -4,11 +4,16 @@
     <link rel="stylesheet" href="/static/style.css">
     <script src="/static/game_script.js" type="text/javascript"></script>
 </head>
-<body onload="startGame()">
+<body onload="startGame({{data.num}})">
 
-<h1> RLbike visualizer </h1>
-
-
+<div class="title"> <h1> RLbike visualizer</h1> </div>
+<div class="separation">
+    <div class="canvas_css", id="board"> </div>
+    <div class="infoborder">
+        <div id="info"> Game: 0 <br> Number of bikes: 0/0 <br> Status: None </div>
+        <div id="info2"> TimeSetp: 0 <br> Map: None  </div>
+    </div>
+</div>
 
 </body>
 </html>

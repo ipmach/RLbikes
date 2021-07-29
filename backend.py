@@ -88,10 +88,19 @@ def view_game_update(game):
     if games.games_status[game]['Status'] == 'Running':
         return {"Board_view": format_view(games.get_board(game, only_update=True)),
                 "TimeStep": games.get_timestep(game),
-                "Status": games.games_status[game]['Status']}
+                "Status": games.games_status[game]['Status'],
+                "NBikes": games.games_status[game]["Number bikes"],
+                "OnlineBikes": games.games_status[game]["Joined gameBike"],
+                "Map": games.games_status[game]["Map"],
+                "Game": game}
     else:
         return {"Board_view": {},
-                "Status": games.games_status[game]['Status']}
+                "TimeStep": games.get_timestep(game),
+                "Status": games.games_status[game]['Status'],
+                "NBikes": games.games_status[game]["Number bikes"],
+                "OnlineBikes": games.games_status[game]["Joined gameBike"],
+                "Map": games.games_status[game]["Map"],
+                "Game": game}
 
 
 def return_view(game, data):
@@ -149,4 +158,4 @@ def play_bike(game):
 
 @app.route('/visualizer/<game>')
 def game(game):
-    return render_template('visualizer.html')
+    return render_template('visualizer.html', data={'num': game})

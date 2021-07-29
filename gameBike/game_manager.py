@@ -15,18 +15,20 @@ class GameManager:
         self.list_games = []
         self.games_status = []
         execution = json.load(open(execution_path))
+        aux = []
         for game in execution['Games']:
             map = game['map']
             if map == "":
                 map = None
-            aux = Game(load_map=map,
-                       bikes=game['bikes'])
-            self.games_status.append(aux.get_status())
-            self.list_games.append(RunGame(aux, view=False,
+            aux.append(Game(load_map=map,
+                       bikes=game['bikes']))
+            self.games_status.append(aux[-1].get_status())
+            self.list_games.append(RunGame(aux[-1], view=False,
                                            time_=float(game['time'])))
             self.list_threads.append(threading.Thread(
                 target=self.list_games[-1],
                 args=()))
+            print(self.games_status)
 
     def __getitem__(self, item):
         """
