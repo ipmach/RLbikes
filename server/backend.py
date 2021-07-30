@@ -130,7 +130,7 @@ def view_bike(game):
     """
     game = int(game)
     if request.method == 'POST':
-        data = json.loads(request.get_json())
+        data = json.loads(request.data)
         return return_view(game, data)
     return "Must be a POST request"
 
@@ -144,7 +144,7 @@ def play_bike(game):
     """
     game = int(game)
     if request.method == 'POST':
-        data = json.loads(request.get_json())
+        data = json.loads(request.data)
         bike = data['bike']
         move = data['move']
         speed = data['speed']

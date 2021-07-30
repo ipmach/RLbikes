@@ -1,4 +1,4 @@
-from heuristic_basic import BasicHeuristic
+from agent_heuristic_python.heuristics.heuristic_basic import BasicHeuristic
 from server.gameBike.game_manager import GameManager
 import matplotlib.pyplot as plt
 
