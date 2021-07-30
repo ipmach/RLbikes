@@ -37,7 +37,7 @@ Some visualizations.
 
 Default visualization for humans.
 
-<img src="https://github.com/ipmach/RLbikes/blob/main/Documentation/human_interface.PNG" alt="drawing" width="400"/>
+<img src="https://github.com/ipmach/RLbikes/blob/main/Documentation/humanInterface.PNG" alt="drawing" width="400"/>
 
 #### Agent visualization
 
