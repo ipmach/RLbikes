@@ -1,5 +1,5 @@
 from heuristic_basic import BasicHeuristic
-from gameBike.game_manager import GameManager
+from server.gameBike.game_manager import GameManager
 import matplotlib.pyplot as plt
 
 def visualize_board(t1, t2, a):
@@ -26,7 +26,7 @@ def visualize_bike(view1, view2, view3, view4):
     plt.title("Game 2 bike 1")
     plt.imshow(view4)
 
-a = GameManager("executions/example_execution.json")
+a = GameManager("server/executions/example_execution.json")
 (run, _) = a[0]
 
 
