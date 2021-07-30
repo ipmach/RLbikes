@@ -33,17 +33,17 @@ IP/visualizer/<game>  # Visualize game with html interface
 
 Some visualizations.
 
+#### HTML visualization
+
+Default visualization for humans.
+
+<img src="https://github.com/ipmach/RLbikes/blob/main/Documentation/human_interface.PNG" alt="drawing" width="400"/>
+
 #### Agent visualization
 
 Two possible examples of what the IA can see, in the left view of the board and in the right possible view of one bike. 
 
 <img src="https://github.com/ipmach/RLbikes/blob/main/Documentation/plt_img.png" alt="drawing" width="400"/>
-
-#### HTML visualization (working progress)
-
-Default visualization for humans.
-
-<img src="https://github.com/ipmach/RLbikes/blob/main/Documentation/human_interface.PNG" alt="drawing" width="400"/>
 
 ### Server internal functions
 
