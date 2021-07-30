@@ -1,41 +1,49 @@
 canvas {
-    border: 1px solid #e68a00;
-    background-color: #e6f2ff;
+    border: 1px solid #333333;
+    background-color: #d9d9d9;
 }
 
 h1{
   font-family: "Oswald", serif;
   color: #e6e6e6;
-  font-size: 70px;
+  font-size: 40px;
   text-decoration: underline;
+  left: 15%;
+   position: relative;
 }
 
 .title{
     position: relative;
-    left: 13%;
+    background-color: #333333;
+    padding: 1px;
+}
+
+body {
+  margin: 0;
+  background-color: #b3b3b3;
 }
 
 .canvas_css{
-    position: relative;
-    left: 13%;
-    float: left;
+  position: relative;
+  left: 13%;
+  float: left;
   width: 50%;
   padding: 10px;
 }
 
 .infoborder {
   border-style: solid;
-  border-color: #e6e6e6;
+  border-color: #333333;
+  border-width: 7px;
   position: relative;
-  left: 13%;
+  left: 5%;
   float:left;
   padding: 9px;
+  margin-top: 10px;
+  background-color: #d9d9d9;
 }
 
 .separation {
   overflow: hidden;
-}
-
-body {
-  background-color: #3399ff;
+  margin-top: 50px;
 }

@@ -1,6 +1,6 @@
 var board;
 var timeSetp;
-const colors = ["#e68a00", "#ff4d4d", "#4da6ff", "#ee0606", "#930af3"]
+const colors = ["#333333", "#ff4d4d", "#4da6ff", "#ee0606", "#930af3"]
 
 function startGame(num) {
     myGameArea.start();
@@ -82,10 +82,10 @@ function updateInfo(value){
                                                                                                                           value.OnlineBikes).replace("${NBikes}",
                                                                                                                           value.NBikes).replace("${Game}",
                                                                                                                           value.Game)
-     document.getElementById("info").style.color  = "#e6e6e6"
+     document.getElementById("info").style.color  = "#333333"
      document.getElementById("info").style.fontSize  =  "20px";
      document.getElementById("info2").innerHTML = "TimeSetp: ${Time} <br> Map: ${Map}".replace("${Time}", value.TimeStep).replace("${Map}", value.Map)
-     document.getElementById("info2").style.color  = "#e6e6e6"
+     document.getElementById("info2").style.color  = "#333333"
      document.getElementById("info2").style.fontSize  =  "20px";
 }
 
